@@ -1,0 +1,304 @@
+let timeEvent;
+let buttonState = 0;
+let trigger;
+let outro;
+let tarot1, tarot2, tarot3;
+let death, devil, fool, hangedman, hermit, moon, hierophant, emperpr, empress, judgement, magician, strength, highpriestess, sun, temperance, lovers, tower, star, chariot, world, wheeloffortune;
+let covered1 = true;
+let covered2 = true;
+let covered3 = true;
+let vidsound = [];
+let counter = 0;
+
+function preload() {
+  death = loadSound('voiceover/death.mp3');
+  devil = loadSound('voiceover/devil.mp3');
+  fool = loadSound('voiceover/fool.mp3');
+  hangedman = loadSound('voiceover/hangedman.mp3');
+  hermit = loadSound('voiceover/hermit.mp3');
+  moon = loadSound('voiceover/moon.mp3');
+  hierophant = loadSound('voiceover/hierophant.mp3');
+  emperor = loadSound('voiceover/emperor.mp3');
+  empress = loadSound('voiceover/empress.mp3');
+  judgement = loadSound('voiceover/judgement.mp3');
+  magician = loadSound('voiceover/magician.mp3');
+  strength = loadSound('voiceover/strength.mp3');
+  highpriestess = loadSound('voiceover/highpriestess.mp3');
+  sun = loadSound('voiceover/sun.mp3');
+  temperance = loadSound('voiceover/temperance.mp3');
+  lovers = loadSound('voiceover/lovers.mp3');
+  tower = loadSound('voiceover/tower.mp3');
+  star = loadSound('voiceover/star.mp3');
+  chariot = loadSound('voiceover/chariot.mp3');
+  world = loadSound('voiceover/world.mp3');
+  wheeloffortune = loadSound('voiceover/wheeloffortune.mp3');
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0);
+  counter = 0;
+  tarot1 = createImg('somatarot.png');
+  tarot2 = createImg('somatarot.png');
+  tarot3 = createImg('somatarot.png');
+
+  // here we put a small array with video and sound into the big array that
+  // will hold all video sound pairs
+  // vidsound[0] = [createVideo('devil.mp4'), devil]
+  // vidsound[0][0].loop();
+  // vidsound[0][1].play();
+
+  vidsound[0] = {
+    'video': createVideo('devil.mp4'),
+    'sound': devil
+  };
+  vidsound[0].video.loop();
+  vidsound[0].video.hide();
+
+  vidsound[1] = {
+    'video': createVideo('hangedman.mp4'),
+    'sound': hangedman
+  };
+  vidsound[1].video.loop();
+  vidsound[1].video.hide();
+
+  vidsound[2] = {
+    'video': createVideo('fool.mp4'),
+    'sound': fool
+  };
+  vidsound[2].video.loop();
+  vidsound[2].video.hide();
+
+  vidsound[3] = {
+    'video': createVideo('death.mp4'),
+    'sound': death
+  };
+  vidsound[3].video.loop();
+  vidsound[3].video.hide();
+
+  vidsound[4] = {
+    'video': createVideo('hermit.mp4'),
+    'sound': hermit
+  };
+  vidsound[4].video.loop();
+  vidsound[4].video.hide();
+
+  vidsound[5] = {
+    'video': createVideo('moon.mp4'),
+    'sound': moon
+  };
+  vidsound[5].video.loop();
+  vidsound[5].video.hide();
+
+  vidsound[6] = {
+    'video': createVideo('hierophant.mp4'),
+    'sound': hierophant
+  };
+  vidsound[6].video.loop();
+  vidsound[6].video.hide();
+
+  vidsound[7] = {
+    'video': createVideo('emperor.mp4'),
+    'sound': emperor
+  };
+  vidsound[7].video.loop();
+  vidsound[7].video.hide();
+
+  vidsound[8] = {
+    'video': createVideo('empress.mp4'),
+    'sound': empress
+  };
+  vidsound[8].video.loop();
+  vidsound[8].video.hide();
+
+  vidsound[9] = {
+    'video': createVideo('judgement.mp4'),
+    'sound': judgement
+  };
+  vidsound[9].video.loop();
+  vidsound[9].video.hide();
+
+  vidsound[10] = {
+    'video': createVideo('magician.mp4'),
+    'sound': magician
+  };
+  vidsound[10].video.loop();
+  vidsound[10].video.hide();
+
+  vidsound[11] = {
+    'video': createVideo('strength.mp4'),
+    'sound': strength
+  };
+  vidsound[11].video.loop();
+  vidsound[11].video.hide();
+
+  vidsound[12] = {
+    'video': createVideo('highpriestess.mp4'),
+    'sound': highpriestess
+  };
+  vidsound[12].video.loop();
+  vidsound[12].video.hide();
+
+  vidsound[13] = {
+    'video': createVideo('sun.mp4'),
+    'sound': sun
+  };
+  vidsound[13].video.loop();
+  vidsound[13].video.hide();
+
+  vidsound[14] = {
+    'video': createVideo('temperance.mp4'),
+    'sound': temperance
+  };
+  vidsound[14].video.loop();
+  vidsound[14].video.hide();
+
+  vidsound[15] = {
+    'video': createVideo('lovers.mp4'),
+    'sound': lovers
+  };
+  vidsound[15].video.loop();
+  vidsound[15].video.hide();
+
+  vidsound[16] = {
+    'video': createVideo('tower.mp4'),
+    'sound': tower
+  };
+  vidsound[16].video.loop();
+  vidsound[16].video.hide();
+
+  vidsound[17] = {
+    'video': createVideo('star.mp4'),
+    'sound': star
+  };
+  vidsound[17].video.loop();
+  vidsound[17].video.hide();
+
+  vidsound[18] = {
+    'video': createVideo('chariot.mp4'),
+    'sound': chariot
+  };
+  vidsound[18].video.loop();
+  vidsound[18].video.hide();
+
+  vidsound[19] = {
+    'video': createVideo('world.mp4'),
+    'sound': world
+  };
+  vidsound[19].video.loop();
+  vidsound[19].video.hide();
+
+  vidsound[20] = {
+    'video': createVideo('wheeloffortune.mp4'),
+    'sound': wheeloffortune
+  };
+  vidsound[20].video.loop();
+  vidsound[20].video.hide();
+
+  shuffle(vidsound, true);
+
+  outro = createVideo('outro.mp4');
+  //outro.loop();
+  outro.hide();
+  //outro.pause();
+}
+
+function draw() {
+  imageMode(CENTER);
+
+  if (counter == 0) {
+
+    let v_width = min(width / 3, 300);
+    let v_height = v_width * 1.666;
+    image(vidsound[0].video, width / 6 + (0 * width / 3), v_height / 2 + 150, min(width / 3, 300), v_height);
+    if (covered1) {
+      tarot1.show();
+    } else {
+      tarot1.hide();
+    }
+    tarot1.size(min(width / 3, 300) + 33, v_height + 33);
+    tarot1.position(width / 6 - v_width / 2 - 13, 0 + 133);
+
+    image(vidsound[1].video, width / 6 + (1 * width / 3), v_height / 2 + 150, min(width / 3, 300), v_height);
+    if (covered2) {
+      tarot2.show();
+    } else {
+      tarot2.hide();
+    }
+    tarot2.size(min(width / 3, 300) + 33, v_height + 33);
+    tarot2.position(3 * width / 6 - v_width / 2 - 12, 0 + 133);
+
+    image(vidsound[2].video, width / 6 + (2 * width / 3), v_height / 2 + 150, min(width / 3, 300), v_height);
+    if (covered3) {
+      tarot3.show();
+    } else {
+      tarot3.hide();
+    }
+    tarot3.size(min(width / 3, 300) + 33, v_height + 33);
+    tarot3.position(5 * width / 6 - v_width / 2 - 12, 0 + 133);
+    //console.log(buttonState);
+
+    if (buttonState == 1) {
+      trigger = millis();
+      // console.log("time " + timeEvent + vidsound[0].sound.duration());
+      //console.log(trigger);
+    }
+    if (trigger >= timeEvent + 10000) {
+      // console.log('done'); 
+      counter = 1;
+    }
+  } else if (counter == 1) {
+		loopend();
+    //console.log(counter); 
+  }
+}
+
+
+function serialEvent() {
+  var data = serial.readLine();
+  console.log(data);
+  
+  //buttonState = 1;
+    vidsound[0].sound.play();
+    covered1 = false;
+    vidsound[0].sound.onended(beginPlay2);
+  
+// function mousePressed() {
+//   if (mouseX > 0 && mouseX < width / 3 && covered1 == true) {
+//     // timeEvent = millis();
+//     // console.log(timeEvent);
+//     // console.log("time " + timeEvent + vidsound[0].sound.duration());
+//     buttonState = 1;
+//     vidsound[0].sound.play();
+//     covered1 = false;
+//     vidsound[0].sound.onended(beginPlay2);
+//     // } else if (mouseX > width / 3 && mouseX < 2 * width / 3 && covered2 == true) {
+//     //   vidsound[1].sound.play();
+//     //   covered2 = false;
+//     // } else if (mouseX > width / 3 && mouseX < 3 * width / 3 && covered3 == true) {
+//     //   vidsound[2].sound.play();
+//     //   covered3 = false;
+//   }
+// }
+
+function beginPlay2() {
+  vidsound[1].sound.play();
+  covered2 = false;
+  vidsound[1].sound.onended(beginPlay3);
+}
+
+function beginPlay3() {
+  vidsound[2].sound.play();
+  covered3 = false;
+  vidsound[2].sound.onended(sessionComplete);
+}
+
+function sessionComplete() {
+  timeEvent = millis();
+}
+
+function loopend(){
+	  image(outro, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+    outro.loop();
+}
+}
